@@ -9,10 +9,10 @@ function assemble_segments($fragments)
         if ($size < 8) {
             continue;
         }
-        if ($size > 256) {
+        if ($size >= 256) {
             $chunks = str_split($fragment, 128);
             foreach ($chunks as $chunk) {
-                if (strlen($segment) + strlen($chunk) > 256) {
+                if (strlen($segment) + strlen($chunk) >= 256) {
                     $segments[] = $segment;
                     $segment = $chunk;
                 } else {
@@ -20,7 +20,7 @@ function assemble_segments($fragments)
                 }
             }
         } else {
-            if (strlen($segment) + $size > 256) {
+            if (strlen($segment) + $size >= 256) {
                 $segments[] = $segment;
                 $segment = $fragment;
             } else {
@@ -31,7 +31,7 @@ function assemble_segments($fragments)
     if (strlen($segment) > 0) {
         $segments[] = $segment;
     }
-    ;return $segments;
+    return $segments;
 }
 
 $fragments = array('Lorem ipsum',
